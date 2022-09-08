@@ -79,6 +79,12 @@
     //     margin-inline: auto;
     // }
 
+//  Layouting
+
+    .flow > *:where(:not(:first-child)) {
+        margin-top: var(--flow, 1rem);
+    }
+
 // Theming
 
     .clr-dim{

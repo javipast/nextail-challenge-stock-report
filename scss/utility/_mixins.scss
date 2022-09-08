@@ -5,3 +5,9 @@
     left: 0;
     object-fit: cover;
 }
+
+@mixin box-shadow($x, $y, $radius, $spread, $color) {
+	box-shadow: $x $y $radius $spread $color;
+	-webkit-box-shadow: $x $y $radius $spread $color;
+	-moz-box-shadow: $x $y $radius $spread $color;
+}

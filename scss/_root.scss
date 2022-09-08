@@ -3,14 +3,19 @@
     --clr-text: #8e9aa9;
     --clr-text-hl: #313642;
     --clr-text-dim: #e2e7ec;
-    --clr-bg-base: #fff;
+    --clr-bg-base: #f4f7fa;
+    --clr-bg-hl: #fff;
 
     //current theme
     --clr: var(--clr-text);
     --clr-dim: var(--clr-text-dim);
     --clr-hl: var(--clr-text-hl);
     --bg: var(--clr-bg-base);
+    --bg-hl: var(--clr-bg-hl);
     
 
     --base-padding: 1rem;
+
+    --stock-card-max-w: 20rem;
+    --stock-card-min-w: 15rem;
 }
