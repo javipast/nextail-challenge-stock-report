@@ -47,6 +47,10 @@
         justify-content: space-between;
     }
     
+    .justify-items-end{
+        justify-items: end;
+    }
+    
     .text-center{
         text-align: center;
     }
@@ -67,9 +71,7 @@
     // .justify-start{
     //     justify-content: start;
     // }
-    // .justify-end{
-    //     justify-content: end;
-    // }
+    
 
     // .j-self-center{
     //     justify-self: center;
@@ -92,4 +94,8 @@
     }
     .clr-hl{
         --clr: var(--clr-hl);
+    }
+
+    .uppercase{
+        text-transform: uppercase;
     }

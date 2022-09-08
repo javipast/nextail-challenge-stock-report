@@ -1,0 +1,45 @@
+.stockout-info{
+    --bar-height: 10px;
+    --fs: .75rem;
+
+    .section{
+        padding-block: .5rem;
+        border-block: 1px solid var(--clr-dim);
+    }
+
+    .percentage{
+        --fs:2em;
+        --fw: 600;
+
+        sup{
+            --fs:.6em;
+        }
+    }
+
+    .bar{
+        position: relative;
+        width: 100%;
+        display: block;
+        height: var(--bar-height);
+        border-radius: var(--bar-height);
+        background-color: var(--clr-dim);
+        overflow: hidden;
+
+        &::after{
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: '';
+            display: block;
+            width: 50%;
+            height: 100%;
+            border-radius: var(--bar-height);
+            background-color: var(--clr-primary);
+        }
+    }
+
+    .coverage-label{
+        --fs:1.2em;
+        --fw: 600;
+    }
+}
