@@ -1,0 +1,16 @@
+:root{
+    --clr-primary: #fa5f60;
+    --clr-text: #8e9aa9;
+    --clr-text-hl: #313642;
+    --clr-text-dim: #e2e7ec;
+    --clr-bg-base: #fff;
+
+    //current theme
+    --clr: var(--clr-text);
+    --clr-dim: var(--clr-text-dim);
+    --clr-hl: var(--clr-text-hl);
+    --bg: var(--clr-bg-base);
+    
+
+    --base-padding: 1rem;
+}

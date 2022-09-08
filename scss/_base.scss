@@ -1,0 +1,29 @@
+body {
+    background: var(--bg, #fff);
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+
+body * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    color: var(--clr, var(--clr-text));
+    line-height: var(--lh, 1.2);
+    font-weight: var(--fw, 500);
+    font-size: var(--fs, 1rem);
+    letter-spacing: var(--ls, 0);
+    font-family: var(--ff);
+}
+
+
+.pad {
+    padding: var(--base-padding, 1rem);
+}
+
+.clr-dimmed{
+    --clr: var(--clr-dim);
+}

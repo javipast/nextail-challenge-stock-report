@@ -1,0 +1,89 @@
+// Position
+
+    .relative{
+        position: relative;
+    }
+
+    .absolute{
+        position: absolute;
+    }
+
+    .object-fit-cover{
+        @include objectFitCover;
+    }
+
+
+// Display
+
+    .flex {
+        display: flex;
+        
+        &.wrap{
+            flex-wrap: wrap;
+        }
+    }
+
+    .flex-column{
+        flex-direction: column;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: var(--cols, 1fr);
+    }
+
+    .flex, .grid{
+        gap: var(--gap-y, var(--gap)) var(--gap-x, var(--gap));
+    }
+
+    .inline-block{
+        display: inline-block;
+    }
+
+
+// Alignment
+
+    .justify-space-between{
+        justify-content: space-between;
+    }
+    
+    .text-center{
+        text-align: center;
+    }
+    // .text-justify{
+    //     text-align: justify;
+    // }
+    
+    // .align-center{
+    //     align-items: center;
+    // }
+    // .al-self-center{
+    //     align-self: center;
+    // }
+
+    // .justify-center{
+    //     justify-content: center;
+    // }
+    // .justify-start{
+    //     justify-content: start;
+    // }
+    // .justify-end{
+    //     justify-content: end;
+    // }
+
+    // .j-self-center{
+    //     justify-self: center;
+    // }
+
+    // .mx-auto{
+    //     margin-inline: auto;
+    // }
+
+// Theming
+
+    .clr-dim{
+        --clr: var(--clr-dim);
+    }
+    .clr-hl{
+        --clr: var(--clr-hl);
+    }
