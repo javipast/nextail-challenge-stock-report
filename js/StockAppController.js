@@ -1,9 +1,18 @@
 export class StockAppController {
 
     constructor(host, dataSourceURL) {
+        window.stockapp = this;
         (this.host = host).addController(this);
         this.data = [];
         this.fetchData(dataSourceURL);
+    }
+
+    hostConnected() {
+        window.addEventListener('card-removed', (e) => this._onCardRemoved(e));
+    }
+
+    hostDisconnected() {
+        window.removeEventListener('card-removed', (e) => this._onCardRemoved(e));
     }
 
     fetchData(sourceURL) {
@@ -25,18 +34,13 @@ export class StockAppController {
         this.host.requestUpdate();
     }
 
+    _onCardRemoved(event){
+        this.removeItem(event.detail?.code);
+    }
+
     _sortData(sort_attr = "sales_ranking") {
         return this.data.sort((a, b) => (a[sort_attr] > b[sort_attr] ? 1 : -1));
     }
 
-    hostConnected() {
-        // window.addEventListener('mousemove', this._onMouseMove);
-    }
-
-    hostDisconnected() {
-        // window.removeEventListener('mousemove', this._onMouseMove);
-    }
+    
 }
-
-// window.stockapp = new StockApp(document.querySelector("#StockCards .cards"));
-// window.stockapp.fetchData("../data/products.json");

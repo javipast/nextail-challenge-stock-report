@@ -17,6 +17,7 @@ export class StockApp extends LitElement {
                     <stock-card 
                         .code=${card.code}
                         .title=${card.name}
+                        .rank=${card.sales_ranking}
                         .price=${card.price}
                         .rate=${parseFloat(card.stockout_rate) * 100}
                         .coverage=${parseFloat(card.wh_coverage) * 100}
