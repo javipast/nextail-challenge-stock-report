@@ -1,9 +1,42 @@
 import { LitElement, html, css } from "../../vendor/lit-core.min.js";
 import ProgressBar from "../progress-bar/ProgressBar.js";
 
-export default class StockoutInfo extends LitElement {
+export class StockoutInfo extends LitElement {
     static properties = {
         rate: {type: Number, reflect: true},
+        coverage: {type: Number, reflect: true},
+    }
+
+    constructor() {
+        super();
+    }
+
+    render() {
+        return html`
+            <div class="section flex flex-column">
+                <div>
+                    <span class="percentage">${this.rate.toFixed(1)}<sup>%</sup></span>
+                    <span class="uppercase clr-dim">stockout</span>
+                </div>
+                <progress-bar 
+                    progress="${this.rate}" 
+                    style="--bar-clr:var(--clr-success); --bar-bg-clr:var(--clr-dim);"
+                />
+            </div>
+            <div class="coverage">
+                <div class="coverage-label" style="--clr:var(--clr-success);">
+                    ${this.coverageLabel}
+                </div>
+                <div class="uppercase clr-dim">WH Coverage</div>
+            </div>
+            
+        `;
+    }
+
+    get coverageLabel(){
+        return this.coverage < 50 
+            ? html`<div class="coverage-label" style="--clr:var(--clr-danger);">Very Low</div>` 
+            : html`<div class="coverage-label" style="--clr:var(--clr-success);">Good</div>`
     }
 
     static styles = css`
@@ -21,7 +54,6 @@ export default class StockoutInfo extends LitElement {
 
         .percentage{
             font-size: 2em;
-            font-weight: 600;
         }
 
         .percentage sup{
@@ -49,46 +81,5 @@ export default class StockoutInfo extends LitElement {
         }
 
     `;
-
-    constructor() {
-        super();
-        this.rate = 0.0;
-    }
-
-    render() {
-        return html`
-            <div class="section flex flex-column">
-                <div>
-                    <span class="percentage">${this.rate.toFixed(1)}<sup>%</sup></span>
-                    <span class="uppercase clr-dim">stockout</span>
-                </div>
-                <progress-bar 
-                    progress="${this.rate}" 
-                    style="--bar-clr:${this.statusColor}; --bar-bg-clr:var(--clr-dim);"
-                />
-            </div>
-            <div class="coverage">
-                <div class="coverage-label" style="--clr:${this.statusColor}">
-                    ${this.coverageLabel}
-                </div>
-                <div class="uppercase clr-dim">WH Coverage</div>
-            </div>
-            
-        `;
-    }
-
-    get coverageLabel(){
-        return this.rate < 50 
-            ? html`<div class="coverage-label" style="--clr:var(--clr-danger);">Very Low</div>` 
-            : html`<div class="coverage-label" style="--clr:var(--clr-success);">Good</div>`
-    }
-
-    get statusColor(){
-        return this.rate < 50
-            ? 'var(--clr-danger)'
-            : 'var(--clr-success)'
-    }
-
-
 }
 customElements.define("stockout-info", StockoutInfo);

@@ -8,6 +8,7 @@
     <title>Code exercise</title>
 
     <link rel="stylesheet" href="css/style.min.css">
+    <script src="js/StockApp.js" type="module"></script>
 
 </head>
 
@@ -15,39 +16,15 @@
 
   <div id="StockReport">
 
-    <nav class="flex justify-space-between pad" style="background:var(--clr-primary);--clr:#fff">
+    <nav class="flex justify-space-between pad align-center" style="background:var(--clr-primary);--clr:#fff">
       <h1>Top Stockouts Review</h1>
       <div>[Options]</div>
     </nav>
 
-    <section id="StockCards">
-        <!-- <div class="text-center clr-dim" style="padding-top: 30vh;">
-          There are no cards at the moment.
-        </div> -->
-        <div class="cards grid">
-          
-          <div class="stock-card">
-            <img src="images/182295.jpg" class="figure">
-            <div class="info pad flow">
-              <div class="id">946548</div>
-              <div class="title clr-hl">Acme Product 02511</div>
-              <div class="price">22.95€</div>
-              <!-- <div class="chart">--Chart--</div> -->
-              
-              
+    <stock-app></stock-app>
 
-              <stockout-info rate="45.8775"></stockout-info>
-
-            </div>
-          </div>
-
-
-        </div>
-        
-    </section>
   </div>
   
-  <script src="js/app.js" type="module"></script>
 </body>
 
 </html>

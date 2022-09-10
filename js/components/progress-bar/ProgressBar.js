@@ -11,8 +11,7 @@ export default class ProgressBar extends LitElement {
             --bar-height: 10px;
             --bar-clr: var(--clr-primary, #000);
             --bar-bg-clr: #aaa;
-        }
-        .bar{
+
             position: relative;
             width: 100%;
             display: block;
@@ -21,12 +20,10 @@ export default class ProgressBar extends LitElement {
             background-color: var(--bar-bg-clr);
             overflow: hidden;
         }
-
-        .bar::after{
+        .bar{
             position: absolute;
             top: 0;
             left: 0;
-            content: '';
             display: block;
             width: var(--bar-width);
             height: 100%;

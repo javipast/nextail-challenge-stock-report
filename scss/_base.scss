@@ -6,7 +6,7 @@ body {
 }
 
 
-body * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -19,6 +19,9 @@ body * {
     font-family: var(--ff);
 }
 
+h1,h2,h3{
+    margin: 0;
+}
 
 .pad {
     padding: var(--base-padding, 1rem);
