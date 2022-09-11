@@ -1,8 +1,19 @@
 import { LitElement, html, css } from "../../vendor/lit-core.min.js";
 
-export default class ProgressBar extends LitElement {
+export class ProgressBar extends LitElement {
     static properties = {
         progress: {type: Number, reflect: true},
+    }
+
+    constructor() {
+        super();
+        this.progress = 0;
+    }
+
+    render() {
+        return html`
+            <div class="bar" style="--bar-width:${this.progress.toFixed(0)}%"></div>
+        `;
     }
 
     static styles = css`
@@ -31,16 +42,5 @@ export default class ProgressBar extends LitElement {
             background-color: var(--bar-clr);
         }
     `;
-
-    constructor() {
-        super();
-        this.progress = 0;
-    }
-
-    render() {
-        return html`
-            <div class="bar" style="--bar-width:${this.progress.toFixed(0)}%"></div>
-        `;
-    }
 }
 customElements.define("progress-bar", ProgressBar);

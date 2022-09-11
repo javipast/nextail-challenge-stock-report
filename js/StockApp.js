@@ -5,6 +5,12 @@ import { StockCard } from "./components/stock-card/StockCard.js"
 export class StockApp extends LitElement {
     controller = new StockAppController(this, "../data/products.json");
 
+    constructor(){
+        super();
+        this.addEventListener('card-removed', 
+            (e) => this.controller.removeItem(e.detail?.code));
+    }
+
     render() {
         return this.templateCards;
     }

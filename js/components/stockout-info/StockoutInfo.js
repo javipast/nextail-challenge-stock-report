@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "../../vendor/lit-core.min.js";
-import ProgressBar from "../progress-bar/ProgressBar.js";
+import { ProgressBar } from "../progress-bar/ProgressBar.js";
 
 export class StockoutInfo extends LitElement {
     static properties = {

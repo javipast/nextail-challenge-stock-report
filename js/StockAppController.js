@@ -7,14 +7,6 @@ export class StockAppController {
         this.fetchData(dataSourceURL);
     }
 
-    hostConnected() {
-        window.addEventListener('card-removed', (e) => this._onCardRemoved(e));
-    }
-
-    hostDisconnected() {
-        window.removeEventListener('card-removed', (e) => this._onCardRemoved(e));
-    }
-
     fetchData(sourceURL) {
         return fetch(sourceURL)
             .then((response) => response.json())
@@ -32,10 +24,6 @@ export class StockAppController {
         this.data = data;
         this._sortData('sales_ranking');
         this.host.requestUpdate();
-    }
-
-    _onCardRemoved(event){
-        this.removeItem(event.detail?.code);
     }
 
     _sortData(sort_attr = "sales_ranking") {

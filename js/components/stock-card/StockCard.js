@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "../../vendor/lit-core.min.js";
 import { StockoutInfo } from "../stockout-info/StockoutInfo.js";
-// import { StockCardController } from "./StockCardController.js"
+import { PromptButton } from "../prompt-button/PromptButton.js";
+
 
 export class StockCard extends LitElement {
     // controller = new StockCardController(this);
@@ -19,25 +20,40 @@ export class StockCard extends LitElement {
 
     constructor() {
         super();
+        this.addEventListener('prompt-accepted', (e) => {
+            this._removeSelf();
+        });
     }
+
+    
 
     render() {
         return html`
-            <div class="rank">${this.rank}</div>
-            <img @click=${this._removeSelf} src="${this.assetsPath + this.code + this.imageExt}" class="figure" />
-            <div class="info">
-                <div class="id">${this.code}</div>
-                <div class="title clr-hl">${this.title}</div>
-                <div class="price">${this.price.toFixed(2)}€</div>
-                <!-- Chart -->
+            <div class="stock-card">
+                <div class="header">
+                    <img src="${this.assetsPath + this.code + this.imageExt}" class="figure" />
+                    <div class="rank">${this.rank}</div>
 
-                <stockout-info .rate="${this.rate}" .coverage="${this.coverage}" />
+                    <div class="prompt-wrapper">
+                        <prompt-button
+                            .actionTitle=${'Mark Complete'}
+                            .promptTitle=${'Are you sure you want to mark this product as complete?'}
+                        />
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="id">${this.code}</div>
+                    <div class="title clr-hl">${this.title}</div>
+                    <div class="price">${this.price.toFixed(2)}€</div>
+                    <!-- Chart -->
+    
+                    <stockout-info .rate="${this.rate}" .coverage="${this.coverage}" />
+                </div>
             </div>
         `;
     }
 
     _removeSelf() {
-        console.log('dispatching!');
         this.dispatchEvent(
             new CustomEvent("card-removed", {
                 detail: { code: this.code },
@@ -67,6 +83,44 @@ export class StockCard extends LitElement {
             color: var(--clr);
         }
 
+        .stock-card:hover .figure{
+            opacity: .1;
+        }
+
+        .stock-card:hover .prompt-wrapper{
+            opacity:1;
+            pointer-events: all;
+        }
+
+        .header, .prompt-wrapper{
+            width: 100%;
+            aspect-ratio: 1 / 1.3;
+            position:relative;
+        }
+
+        .prompt-wrapper{
+            --fs: 0.8rem;
+            --clr: var(--clr-hl);
+            --bt-clr: #eee;
+            --bt-clr-bg: #000A;
+            --bt-radius: 3rem;
+            --bt-pad: .7em 1.3em;
+            --bt-border: 1px solid;
+
+            opacity:0;
+            pointer-events: all;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            position: absolute;
+            width: 100%;
+            padding: var(--base-padding);
+            text-align:center;
+
+            transition: opacity .25s ease-in-out;
+        }
+
         .rank {
             --fs: 0.75rem;
             --clr: var(--clr-bg-hl);
@@ -80,20 +134,22 @@ export class StockCard extends LitElement {
             padding: 0.2em 0.5em;
         }
 
+        .figure {
+            object-fit: cover;
+            object-position: 50% 20%;
+            position: absolute;
+            width:100%;
+            height:100%;
+            top:0;
+            left:0;
+
+            transition: opacity .25s ease-in-out;
+        }
+
         .info {
             padding: var(--pad, 1rem);
         }
 
-        .figure {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            object-fit: cover;
-            height: auto;
-            object-position: 50% 20%;
-            aspect-ratio: 1 / 1.3;
-        }
 
         .id {
             --fs: 0.8rem;
