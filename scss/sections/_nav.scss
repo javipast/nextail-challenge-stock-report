@@ -1,0 +1,10 @@
+nav{
+    --clr:#fff;
+    padding: var(--base-padding);
+    background:var(--clr-primary);
+    width: 100%;
+    height: var(--nav-height, auto);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

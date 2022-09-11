@@ -70,6 +70,7 @@ export class StockCard extends LitElement {
 
             max-width: var(--stock-card-max-w, 20rem);
             min-width: var(--stock-card-min-w, 10rem);
+            width: 100%;
             background: var(--bg);
             border-radius: var(--border-radius);
             overflow: hidden;

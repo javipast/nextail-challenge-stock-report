@@ -2,6 +2,7 @@ export class StockAppController {
 
     constructor(host, dataSourceURL) {
         window.stockapp = this;
+        this.dataLoaded = false;
         (this.host = host).addController(this);
         this.data = [];
         this.fetchData(dataSourceURL);
@@ -23,6 +24,7 @@ export class StockAppController {
     _onDataLoaded(data) {
         this.data = data;
         this._sortData('sales_ranking');
+        this.dataLoaded = true;
         this.host.requestUpdate();
     }
 

@@ -12,7 +12,20 @@ export class StockApp extends LitElement {
     }
 
     render() {
-        return this.templateCards;
+        let content;
+        if(!this.controller.dataLoaded){
+            content = this.templateLoading;
+        }else{
+            content = this.controller.data.length 
+                ? this.templateCards
+                : this.templateEmpty
+        }
+
+        return html`
+            <div class="stock-app">
+                ${content}
+            </div>
+        `
     }
 
     get templateCards() {
@@ -34,17 +47,27 @@ export class StockApp extends LitElement {
     }
 
     get templateLoading() {
-        return html` <div class="text-center clr-dim" style="padding-top: 30vh;">Fetching data...</div> `;
+        return html` <div class="centered-content">Fetching data...</div> `;
     }
 
     get templateEmpty() {
-        return html` <div class="text-center clr-dim" style="padding-top: 30vh;">There are no cards at the moment. Yeah!</div> `;
+        return html` <div class="centered-content">There are no cards at the moment. Yeah!</div> `;
     }
 
     static styles = css`
-        :host{
+
+        .stock-app{
             position: relative;
             display: grid;
+            min-height: calc(100vh - var(--nav-height));
+            padding: var(--base-padding);
+            box-sizing:border-box;
+        }
+
+        .centered-content{
+            display: grid;
+            align-items:center;
+            justify-content: center;
         }
 
         .cards{
@@ -52,6 +75,7 @@ export class StockApp extends LitElement {
             gap: var(--base-padding);
             grid-template-columns: repeat(auto-fill, minmax(var(--stock-card-min-w), 1fr));
             padding: var(--base-padding, 1rem);
+            height: fit-content;
         }
     `
 }
