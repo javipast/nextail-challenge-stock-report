@@ -16,7 +16,6 @@ export class PromptButton extends LitElement {
     }
 
     render() {
-        console.log(this.actionTitle);
         return html` ${!this.isPrompting ? this.titleTemplate : this.promptTemplate} `;
     }
 
@@ -27,9 +26,9 @@ export class PromptButton extends LitElement {
     get promptTemplate() {
         return html`
             <div>${this.promptTitle}</div>
-            <div class="buttons-wrapper" style="--fs:clamp(1rem, 1.4em, 24px);">
+            <div class="buttons-wrapper" style="--fs:clamp(1rem, 1.3em, 24px);">
+                <button @click=${this._onCancel}>✗</button>
                 <button @click=${this._onAccept}>✓</button>
-                <button @click=${this._onCancel}>⨯</button>
             </div>
         `;
     }
@@ -80,7 +79,12 @@ export class PromptButton extends LitElement {
             margin-top: 1rem;
             display: flex;
             justify-content: center;
-            gap: 1em;
+        }
+        .buttons-wrapper > *:first-child{
+            border-radius: var(--bt-radius, 0px) 0 0 var(--bt-radius, 0px);
+        }
+        .buttons-wrapper > *:last-child{
+            border-radius: 0 var(--bt-radius, 0px) var(--bt-radius, 0px) 0;
         }
 
     `;

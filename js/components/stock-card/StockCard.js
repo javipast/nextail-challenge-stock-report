@@ -1,11 +1,11 @@
 import { LitElement, html, css } from "../../vendor/lit-core.min.js";
 import { StockoutInfo } from "../stockout-info/StockoutInfo.js";
 import { PromptButton } from "../prompt-button/PromptButton.js";
+import { BarChart } from "../bar-chart/BarChart.js";
 
 
 export class StockCard extends LitElement {
-    // controller = new StockCardController(this);
-
+    
     assetsPath = "images/";
     imageExt = ".jpg";
 
@@ -16,6 +16,7 @@ export class StockCard extends LitElement {
         rate: { type: Number, reflect: true },
         rank: { type: Number },
         coverage: { type: Number, reflect: true },
+        sizeStock: { type: Object },
     };
 
     constructor() {
@@ -45,9 +46,16 @@ export class StockCard extends LitElement {
                     <div class="id">${this.code}</div>
                     <div class="title clr-hl">${this.title}</div>
                     <div class="price">${this.price.toFixed(2)}€</div>
-                    <!-- Chart -->
-    
-                    <stockout-info .rate="${this.rate}" .coverage="${this.coverage}" />
+                    
+                    <bar-chart
+                        .data=${this.sizeStock}
+                    >
+                    </bar-chart>
+                    
+                    <stockout-info 
+                        .rate="${this.rate}" 
+                        .coverage="${this.coverage}"
+                    />
                 </div>
             </div>
         `;
@@ -122,6 +130,14 @@ export class StockCard extends LitElement {
             transition: opacity .25s ease-in-out;
         }
 
+        bar-chart{
+            --fs: .75rem;
+            --bar-clr: var(--clr-hl);
+
+            display:block;
+            margin-bottom: 1rem;
+        }
+
         .rank {
             --fs: 0.75rem;
             --clr: var(--clr-bg-hl);
@@ -164,7 +180,7 @@ export class StockCard extends LitElement {
         }
         .price {
             --fw: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
     `;
 }
