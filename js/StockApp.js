@@ -3,7 +3,7 @@ import { StockAppController } from "./StockAppController.js";
 import { StockCard } from "./components/stock-card/StockCard.js"
 
 export class StockApp extends LitElement {
-    controller = new StockAppController(this, "../data/products.json");
+    controller = new StockAppController(this, "data/products.json");
 
     constructor(){
         super();
