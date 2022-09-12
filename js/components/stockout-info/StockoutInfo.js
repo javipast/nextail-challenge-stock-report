@@ -13,23 +13,34 @@ export class StockoutInfo extends LitElement {
 
     render() {
         return html`
-            <div class="section flex flex-column">
+            ${this.rateTemplate}
+            ${this.coverageTemplate}
+        `;
+    }
+
+    get rateTemplate(){
+        return html`
+            <div class="rate">
                 <div>
                     <span class="percentage">${this.rate.toFixed(1)}<sup>%</sup></span>
-                    <span class="uppercase clr-dim">stockout</span>
+                    <span class="uppercase">stockout</span>
                 </div>
                 <progress-bar 
                     progress="${this.rate}" 
                     style="--bar-clr:var(--clr-success); --bar-bg-clr:var(--clr-dim);"
                 />
             </div>
+        `;
+    }
+
+    get coverageTemplate(){
+        return html`
             <div class="coverage">
                 <div class="coverage-label" style="--clr:var(--clr-success);">
                     ${this.coverageLabel}
                 </div>
-                <div class="uppercase clr-dim">WH Coverage</div>
+                <div class="uppercase">WH Coverage</div>
             </div>
-            
         `;
     }
 
@@ -47,7 +58,7 @@ export class StockoutInfo extends LitElement {
             font-size: var(--fs);
         }
         
-        .section{
+        .rate{
             padding-block: .5rem;
             border-block: 1px solid var(--clr-dim);
         }

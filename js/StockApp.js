@@ -12,20 +12,21 @@ export class StockApp extends LitElement {
     }
 
     render() {
-        let content;
+        return html`
+            <div class="stock-app">
+                ${this.currentStateTemplate}
+            </div>
+        `
+    }
+
+    get currentStateTemplate(){
         if(!this.controller.dataLoaded){
-            content = this.templateLoading;
+            return this.templateLoading;
         }else{
-            content = this.controller.data.length 
+            return this.controller.data.length 
                 ? this.templateCards
                 : this.templateEmpty
         }
-
-        return html`
-            <div class="stock-app">
-                ${content}
-            </div>
-        `
     }
 
     get templateCards() {

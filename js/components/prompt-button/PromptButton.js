@@ -16,11 +16,15 @@ export class PromptButton extends LitElement {
     }
 
     render() {
-        return html` ${!this.isPrompting ? this.titleTemplate : this.promptTemplate} `;
+        return html`
+        ${!this.isPrompting 
+            ? this.titleTemplate 
+            : this.promptTemplate} 
+        `;
     }
 
     get titleTemplate() {
-        return html` <button @click=${this.showPrompt}>${this.actionTitle}</button> `;
+        return html` <button @click=${this._showPrompt}>${this.actionTitle}</button> `;
     }
 
     get promptTemplate() {
@@ -33,14 +37,14 @@ export class PromptButton extends LitElement {
         `;
     }
 
-    showPrompt(){
+    _showPrompt(){
         this.isPrompting = true;
     }
-    showTitle(){
+    _showTitle(){
         this.isPrompting = false;
     }
 
-    _onAccept(e){
+    _onAccept(){
         this.dispatchEvent(
             new CustomEvent("prompt-accepted", {
                 detail: { actionId: this.actionId },
@@ -55,10 +59,6 @@ export class PromptButton extends LitElement {
     }
 
     static styles = css`
-        :host {
-            
-        }
-
         *{
             color: var(--clr, #000);
         }

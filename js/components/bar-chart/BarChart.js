@@ -3,6 +3,7 @@ import { LitElement, html, css } from "../../vendor/lit-core.min.js";
 export class BarChart extends LitElement {
     static properties = {
         data: { type: Object, state: true },
+        bars: { type: Array, state: true },
     };
 
     constructor() {
@@ -10,34 +11,52 @@ export class BarChart extends LitElement {
     }
 
     render() {
-        const bars = this.getBarsData();
-        const highestValue = this.highestDataValue();
+        this.bars = this._getBarsData();
+        const highestValue = this._highestDataValue();
 
         return html`
             <div class="bar-chart">
-                <div class="bar-chart__values">
-                    ${this.getChartScaleValues(highestValue).map((value) => {
-                        return html` <span>${value}</span> `;
-                    })}
-                </div>
+                ${this.valuesRulerTemplate}
                 <div class="bar-chart__chart">
                     <div class="ruler ${highestValue % 2 === 0 ? "even" : "odd"}"></div>
-                    <div class="bars">
-                        ${bars.map((bar) => {
-                            return html`<div class="bar" style="--height:${this.getBarHeight(bar.value, highestValue)}%"></div>`;
-                        })}
-                    </div>
-                    <div class="legend">
-                        ${bars.map((bar) => {
-                            return html`<span class="label">${bar.label}</span>`;
-                        })}
-                    </div>
+                    ${this.barsTemplate}
+                    ${this.legendTemplate}
                 </div>
             </div>
         `;
     }
 
-    getBarsData(){
+    get barsTemplate() {
+        return html`
+            <div class="bars">
+                ${this.bars.map((bar) => {
+                    return html`<div class="bar" style="--height:${this._getBarHeight(bar.value, this._highestDataValue())}%"></div>`;
+                })}
+            </div>
+        `;
+    }
+
+    get legendTemplate() {
+        return html`
+            <div class="legend">
+                ${this.bars.map((bar) => {
+                    return html`<span class="label">${bar.label}</span>`;
+                })}
+            </div>
+        `;
+    }
+
+    get valuesRulerTemplate() {
+        return html`
+            <div class="bar-chart__values">
+                ${this._getChartScaleValues(this._highestDataValue()).map((value) => {
+                    return html` <span>${value}</span> `;
+                })}
+            </div>
+        `;
+    }
+
+    _getBarsData() {
         let bars = [];
         for (const [key, value] of Object.entries(this.data)) {
             let bar = new Object();
@@ -45,35 +64,26 @@ export class BarChart extends LitElement {
             bar.value = value;
             bars.push(bar);
         }
-        // console.log(bars);
         return bars;
     }
 
-    getBarHeight(value, highestValue){
-        return parseInt(value * 100 / highestValue);
-    }
-
-    getChartScaleValues(highestValue = 0) {
-        let values = [];
-        highestValue % 2 == 0 ? (values = [0, highestValue / 2, highestValue]) : (values = [0, highestValue]);
-
-        return values;
-    }
-
-    get chartElementLabels() {
-        let labels = ``;
-        for (const [key, value] of Object.entries(this.data)) {
-            labels += html`<span class="label">${key}</span>`;
-        }
-        return html`${labels}`;
-    }
-
-    highestDataValue() {
+    _highestDataValue() {
         let val = 0;
         for (const [key, value] of Object.entries(this.data)) {
             if (value > val) val = value;
         }
         return val + 1;
+    }
+
+    _getBarHeight(value, highestValue) {
+        return parseInt((value * 100) / highestValue);
+    }
+
+    _getChartScaleValues(highestValue = 0) {
+        let values = [];
+        highestValue % 2 == 0 ? (values = [0, highestValue / 2, highestValue]) : (values = [0, highestValue]);
+
+        return values;
     }
 
     static styles = css`

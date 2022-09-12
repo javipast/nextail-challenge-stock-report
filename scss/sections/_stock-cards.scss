@@ -1,9 +1,0 @@
-#StockCards{
-    position: relative;
-    padding: var(--base-padding, 1rem);
-
-    .cards{
-        --cols: repeat(auto-fill, minmax(var(--stock-card-min-w), 1fr));
-        --gap: var(--base-padding);
-    }
-}

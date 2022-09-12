@@ -8,10 +8,10 @@ export class StockAppController {
         this.fetchData(dataSourceURL);
     }
 
-    fetchData(sourceURL) {
-        return fetch(sourceURL)
-            .then((response) => response.json())
-            .then((data) => this._onDataLoaded(data));
+    async fetchData(sourceURL) {
+        const response = await fetch(sourceURL);
+        const data = await response.json();
+        return this._onDataLoaded(data);
     }
 
     removeItem(code) {
@@ -32,5 +32,4 @@ export class StockAppController {
         return this.data.sort((a, b) => (a[sort_attr] > b[sort_attr] ? 1 : -1));
     }
 
-    
 }
